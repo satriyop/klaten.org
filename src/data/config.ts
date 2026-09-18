@@ -70,7 +70,7 @@ export const ACTIVE_CLUBS: ClubInfo[] = [
     badge: 'Klub Pendiri • Aktif',
     tagline: 'Klub Renang Prestasi & Pembinaan Karakter Atlet di Klaten',
     description: 'Klub renang perintis di klaten.org dengan sistem absensi latihan digital, manajemen kelompok umur (KU), dan kesiapan kompetisi resmi akuatik regional.',
-    venues: ['Kolam Renang Dodok (Klaten Kota)', 'Umbul Tirwin / Sekitar Klaten'],
+    venues: ['Umbul Tirtomulyono Pluneng', 'Umbul Brondong', 'Kolam Renang Depo'],
     ageGroups: ['KU 5 & 4 (Pemula)', 'KU 3 & 2 (Prestasi)', 'KU 1 & Senior'],
     coachesCount: 'Pelatih Berlisensi',
   },
