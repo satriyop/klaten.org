@@ -3,51 +3,39 @@
 @layer base {
   html {
     scroll-behavior: smooth;
-    color-scheme: dark;
+    color-scheme: light;
   }
 
   body {
-    background-color: #080d1a;
-    color: #f1f5f9;
+    background-color: #f8fafc;
+    color: #0f172a;
     font-family: 'Plus Jakarta Sans', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
     overflow-x: hidden;
   }
 }
 
-/* Custom Glass & Glow Utility Classes */
-.glow-teal {
-  box-shadow: 0 0 50px -10px rgba(13, 148, 136, 0.25);
+/* Crisp Clean Light Theme Card & Shadow Utilities */
+.card-clean {
+  background-color: #ffffff;
+  border: 1px solid #e2e8f0;
+  box-shadow: 0 1px 3px 0 rgba(15, 23, 42, 0.05), 0 1px 2px -1px rgba(15, 23, 42, 0.05);
 }
 
-.glow-amber {
-  box-shadow: 0 0 50px -10px rgba(245, 158, 11, 0.2);
+.card-clean-hover {
+  transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-.glass-card {
-  background: rgba(15, 23, 42, 0.65);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-}
-
-.glass-card-hover {
-  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
-}
-
-.glass-card-hover:hover {
+.card-clean-hover:hover {
   transform: translateY(-2px);
-  border-color: rgba(20, 184, 166, 0.3);
-  box-shadow: 0 12px 30px -10px rgba(0, 0, 0, 0.5);
+  border-color: #cbd5e1;
+  box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
 }
 
-.gradient-text-teal {
-  background: linear-gradient(135deg, #38bdf8 0%, #2dd4bf 50%, #34d399 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+/* Authentic WhatsApp Green */
+.bg-whatsapp {
+  background-color: #25D366;
 }
 
-.gradient-text-amber {
-  background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 50%, #f97316 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
+.bg-whatsapp:hover {
+  background-color: #20bd5a;
 }
