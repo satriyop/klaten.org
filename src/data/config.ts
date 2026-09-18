@@ -35,8 +35,8 @@ export const SITE_CONFIG = {
   city: 'Klaten, Jawa Tengah',
   contact: {
     // Ganti dengan nomor WhatsApp admin / PIC klaten.org yang aktif
-    whatsappNumber: '6281234567890',
-    whatsappFormatted: '+62 812-3456-7890',
+    whatsappNumber: '62817831441',
+    whatsappFormatted: '+62 817-831-441',
     email: 'kontak@klaten.org',
   },
 };
