@@ -106,7 +106,7 @@ klaten.org/
 │   │   ├── Footer.astro            # Footer & Hak Cipta
 │   │   ├── Header.astro            # Navigasi & Aksi WhatsApp
 │   │   ├── Hero.astro              # Hero Section & Live Stats
-│   │   ├── PlatformFeatures.astro  # Fitur Presensi, Portal Wali, Subdomain
+│   │   ├── PlatformFeatures.astro  # Fitur Presensi, Portal Orang Tua, Subdomain
 │   │   └── SportsExplorer.astro    # Tab Cabor & Showcase BMSC
 │   ├── data/
 │   │   └── config.ts               # Data terpusat & Template WhatsApp

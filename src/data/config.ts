@@ -107,7 +107,7 @@ export const SPORTS_CATEGORIES: SportCategory[] = [
     status: 'open',
     statusText: 'Buka Pendaftaran SSB',
     clubCountText: 'Slot Subdomain SSB Tersedia',
-    description: 'Sekolah Sepak Bola (SSB) di Klaten kini dapat memodernisasi absensi lapangan, data wali atlet, dan registrasi turnamen.',
+    description: 'Sekolah Sepak Bola (SSB) di Klaten kini dapat memodernisasi absensi lapangan, data orang tua atlet, dan registrasi turnamen.',
     roadmapSlug: 'ssb',
   },
   {
@@ -157,7 +157,7 @@ export const PLATFORM_FEATURES = [
     title: 'Portal Orang Tua (Guardian Home)',
     subtitle: 'Ketenangan & Transparansi Nyata',
     description: 'Orang tua dapat memantau jadwal latihan mingguan, mengecek kehadiran anak secara real-time, dan menerima pengumuman resmi klub.',
-    audience: 'Orang Tua / Wali',
+    audience: 'Orang Tua',
     icon: 'users',
     badge: 'Terbukti Efektif',
   },
