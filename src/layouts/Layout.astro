@@ -1,0 +1,61 @@
+---
+import '../styles/global.css';
+import { SITE_CONFIG } from '../data/config';
+
+interface Props {
+  title?: string;
+  description?: string;
+}
+
+const {
+  title = SITE_CONFIG.title,
+  description = SITE_CONFIG.description,
+} = Astro.props;
+---
+
+<!doctype html>
+<html lang="id">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <meta name="generator" content={Astro.generator} />
+
+    <!-- Primary Meta Tags -->
+    <title>{title}</title>
+    <meta name="title" content={title} />
+    <meta name="description" content={description} />
+    <meta name="keywords" content="klaten, olahraga klaten, klub renang klaten, bmsc klaten, bulutangkis klaten, ssb klaten, tenis klaten, futsal klaten, jadwal latihan olahraga, pelatih klaten" />
+    <meta name="author" content="Komunitas Olahraga Klaten" />
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={SITE_CONFIG.url} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:locale" content="id_ID" />
+    <meta property="og:site_name" content="klaten.org" />
+
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content={SITE_CONFIG.url} />
+    <meta property="twitter:title" content={title} />
+    <meta property="twitter:description" content={description} />
+
+    <!-- Google Fonts: Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  </head>
+  <body class="min-h-screen flex flex-col bg-[#070b14] text-slate-100 selection:bg-teal-500 selection:text-black">
+    <div class="fixed inset-0 pointer-events-none -z-10 overflow-hidden">
+      <!-- Ambient background lighting effects -->
+      <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-gradient-to-b from-teal-500/15 via-sky-500/10 to-transparent blur-3xl opacity-70"></div>
+      <div class="absolute top-[800px] -left-40 w-[500px] h-[500px] bg-teal-600/10 blur-3xl rounded-full"></div>
+      <div class="absolute top-[1400px] -right-40 w-[500px] h-[500px] bg-amber-500/10 blur-3xl rounded-full"></div>
+      <div class="absolute inset-0 bg-[radial-gradient(#1e293b_1px,transparent_1px)] [background-size:24px_24px] opacity-20"></div>
+    </div>
+
+    <slot />
+  </body>
+</html>

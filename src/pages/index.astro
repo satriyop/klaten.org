@@ -1,0 +1,24 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Hero from '../components/Hero.astro';
+import SportsExplorer from '../components/SportsExplorer.astro';
+import PlatformFeatures from '../components/PlatformFeatures.astro';
+import AudiencePillars from '../components/AudiencePillars.astro';
+import FaqSection from '../components/FaqSection.astro';
+import CtaBanner from '../components/CtaBanner.astro';
+import Footer from '../components/Footer.astro';
+---
+
+<Layout>
+  <Header />
+  <main class="flex-grow">
+    <Hero />
+    <SportsExplorer />
+    <PlatformFeatures />
+    <AudiencePillars />
+    <FaqSection />
+    <CtaBanner />
+  </main>
+  <Footer />
+</Layout>

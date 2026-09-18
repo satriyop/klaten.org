@@ -1,0 +1,266 @@
+---
+import { SPORTS_CATEGORIES, ACTIVE_CLUBS, WA_TEMPLATES, getWhatsAppLink } from '../data/config';
+
+const bmscClub = ACTIVE_CLUBS[0];
+---
+
+<section id="cabor" class="py-20 bg-[#0a1020]/60 border-y border-white/5 relative">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    
+    <!-- Section Header -->
+    <div class="text-center max-w-3xl mx-auto mb-14">
+      <div class="inline-flex items-center gap-2 px-3 py-1 rounded-lg bg-sky-500/10 border border-sky-500/20 text-sky-400 text-xs font-semibold uppercase tracking-wider mb-3">
+        Direktori & Ekosistem Olahraga
+      </div>
+      <h2 class="text-3xl sm:text-4xl font-extrabold text-white tracking-tight mb-4">
+        Cabang Olahraga di Klaten
+      </h2>
+      <p class="text-slate-400 text-base sm:text-lg">
+        Dari renang yang telah aktif berjalan bersama BMSC Klaten, hingga cabang olahraga populer lainnya yang siap didigitalkan.
+      </p>
+    </div>
+
+    <!-- Interactive Tabs Navigation -->
+    <div class="flex items-center justify-start sm:justify-center gap-2.5 overflow-x-auto pb-4 mb-10 no-scrollbar">
+      {SPORTS_CATEGORIES.map((sport, index) => (
+        <button
+          type="button"
+          data-tab-target={`panel-${sport.id}`}
+          class={`tab-button whitespace-nowrap px-4 sm:px-5 py-2.5 rounded-xl font-semibold text-sm transition-all duration-200 cursor-pointer flex items-center gap-2 border ${
+            index === 0
+              ? 'active-tab bg-teal-500 text-slate-950 border-teal-400 shadow-lg shadow-teal-500/25'
+              : 'bg-slate-900/80 text-slate-400 border-white/10 hover:border-slate-600 hover:text-white'
+          }`}
+        >
+          <span>{sport.name}</span>
+          {sport.status === 'active' ? (
+            <span class="px-1.5 py-0.5 text-[10px] font-bold rounded bg-teal-950/80 text-teal-200">Aktif</span>
+          ) : (
+            <span class="px-1.5 py-0.5 text-[10px] font-medium rounded bg-slate-800 text-slate-300">Buka</span>
+          )}
+        </button>
+      ))}
+    </div>
+
+    <!-- TAB 1: RENANG / BMSC (ACTIVE FLAGSHIP) -->
+    <div id="panel-renang" class="tab-panel block">
+      <div class="glass-card rounded-3xl p-6 sm:p-10 border-teal-500/30 relative overflow-hidden">
+        <div class="absolute -right-20 -bottom-20 w-80 h-80 bg-teal-500/10 rounded-full blur-3xl pointer-events-none"></div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+          <!-- Left: Club Profile Info -->
+          <div class="lg:col-span-7 space-y-6">
+            <div class="flex flex-wrap items-center gap-2.5">
+              <span class="px-3 py-1 rounded-full text-xs font-bold bg-teal-500/20 text-teal-300 border border-teal-500/40">
+                {bmscClub.badge}
+              </span>
+              <span class="px-3 py-1 rounded-full text-xs font-medium bg-slate-800 text-slate-300 border border-slate-700">
+                Subdomain: {bmscClub.subdomain}
+              </span>
+            </div>
+
+            <div>
+              <h3 class="text-2xl sm:text-3xl font-extrabold text-white mb-2">
+                {bmscClub.name}
+              </h3>
+              <p class="text-teal-400 font-semibold text-sm sm:text-base">
+                "{bmscClub.tagline}"
+              </p>
+            </div>
+
+            <p class="text-slate-300 text-sm sm:text-base leading-relaxed">
+              {bmscClub.description}
+            </p>
+
+            <!-- Club Details Grid -->
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 pt-2">
+              <div class="bg-slate-900/60 p-4 rounded-xl border border-white/5">
+                <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                  <svg class="w-4 h-4 text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  Lokasi Latihan di Klaten
+                </div>
+                <div class="text-sm font-medium text-slate-200">
+                  {bmscClub.venues.join(' • ')}
+                </div>
+              </div>
+
+              <div class="bg-slate-900/60 p-4 rounded-xl border border-white/5">
+                <div class="text-xs font-semibold text-slate-400 uppercase tracking-wider mb-1 flex items-center gap-1.5">
+                  <svg class="w-4 h-4 text-teal-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
+                  </svg>
+                  Kelompok Usia Atlet
+                </div>
+                <div class="text-sm font-medium text-slate-200">
+                  {bmscClub.ageGroups?.join(', ')}
+                </div>
+              </div>
+            </div>
+
+            <!-- Action buttons -->
+            <div class="flex flex-wrap gap-3 pt-2">
+              <a
+                href={bmscClub.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="px-6 py-3 rounded-xl bg-teal-500 hover:bg-teal-400 text-slate-950 font-bold text-sm shadow-lg shadow-teal-500/25 transition-all flex items-center gap-2"
+              >
+                <span>Buka Portal Klub BMSC</span>
+                <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+                </svg>
+              </a>
+
+              <a
+                href={getWhatsAppLink(WA_TEMPLATES.parentInquiry('BMSC Klaten'))}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="px-5 py-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-200 font-semibold text-sm border border-slate-700 transition-all flex items-center gap-2"
+              >
+                <span>Tanya Info Latihan (Wali)</span>
+              </a>
+            </div>
+          </div>
+
+          <!-- Right: Live System Capability Card -->
+          <div class="lg:col-span-5 bg-gradient-to-b from-slate-900 to-[#0c1322] p-6 rounded-2xl border border-teal-500/20 shadow-xl">
+            <div class="flex items-center justify-between border-b border-white/5 pb-4 mb-4">
+              <div class="flex items-center gap-2">
+                <span class="w-2.5 h-2.5 rounded-full bg-emerald-400 animate-ping"></span>
+                <span class="text-xs font-bold text-slate-300 uppercase tracking-wider">Live System Demo</span>
+              </div>
+              <span class="text-xs text-teal-400 font-mono">bmsc.klaten.org</span>
+            </div>
+
+            <div class="space-y-3.5">
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-800/50 border border-white/5">
+                <div class="w-8 h-8 rounded-lg bg-teal-500/20 text-teal-400 flex items-center justify-center shrink-0 text-sm font-bold">
+                  ✓
+                </div>
+                <div>
+                  <div class="text-sm font-bold text-white">Presensi Digital Pelatih</div>
+                  <div class="text-xs text-slate-400">Pencatatan sesi kolam langsung dari smartphone tanpa kertas.</div>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-800/50 border border-white/5">
+                <div class="w-8 h-8 rounded-lg bg-sky-500/20 text-sky-400 flex items-center justify-center shrink-0 text-sm font-bold">
+                  ✓
+                </div>
+                <div>
+                  <div class="text-sm font-bold text-white">Portal Orang Tua (Guardian Home)</div>
+                  <div class="text-xs text-slate-400">Wali memantau jadwal dan riwayat kehadiran anak secara transparan.</div>
+                </div>
+              </div>
+
+              <div class="flex items-start gap-3 p-3 rounded-xl bg-slate-800/50 border border-white/5">
+                <div class="w-8 h-8 rounded-lg bg-amber-500/20 text-amber-400 flex items-center justify-center shrink-0 text-sm font-bold">
+                  ✓
+                </div>
+                <div>
+                  <div class="text-sm font-bold text-white">Roster & Registrasi Kejuaraan</div>
+                  <div class="text-xs text-slate-400">Kesiapan data atlet renang untuk event Pengcab/Kejurkab.</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="mt-5 pt-4 border-t border-white/5 text-center">
+              <span class="text-xs text-slate-400">
+                Teknologi yang sama siap diterapkan untuk klub Anda.
+              </span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- OTHER TABS (Bulutangkis, SSB, Tenis, Futsal, Lari) -->
+    {SPORTS_CATEGORIES.slice(1).map((sport) => {
+      const waSportLink = getWhatsAppLink(WA_TEMPLATES.clubRegistration(sport.name));
+      return (
+        <div id={`panel-${sport.id}`} class="tab-panel hidden">
+          <div class="glass-card rounded-3xl p-6 sm:p-10 border-white/10 relative overflow-hidden">
+            <div class="max-w-3xl">
+              <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full text-xs font-bold bg-amber-500/15 text-amber-300 border border-amber-500/30 mb-4">
+                Peluang Klub Perintis di Klaten
+              </div>
+              <h3 class="text-2xl sm:text-3xl font-extrabold text-white mb-3">
+                Cabang Olahraga: {sport.name}
+              </h3>
+              <p class="text-slate-300 text-base leading-relaxed mb-6">
+                {sport.description}
+              </p>
+
+              <!-- What the club gets -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-8">
+                <div class="p-4 rounded-xl bg-slate-900/60 border border-white/5">
+                  <div class="text-teal-400 font-bold text-sm mb-1">Subdomain Eksklusif Resmi</div>
+                  <div class="text-slate-400 text-xs">
+                    Dapatkan alamat seperti <code class="text-slate-200">{sport.roadmapSlug || 'klub'}-[nama].klaten.org</code> tanpa biaya server.
+                  </div>
+                </div>
+                <div class="p-4 rounded-xl bg-slate-900/60 border border-white/5">
+                  <div class="text-teal-400 font-bold text-sm mb-1">Sistem Presensi & Komunikasi</div>
+                  <div class="text-slate-400 text-xs">
+                    Pelatih bisa mendata kehadiran di lapangan, orang tua dapat memantau jadwal dan riwayat latihan anak.
+                  </div>
+                </div>
+              </div>
+
+              <!-- CTA for this sport -->
+              <div class="flex flex-wrap items-center gap-4">
+                <a
+                  href={waSportLink}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  class="px-6 py-3.5 rounded-xl bg-gradient-to-r from-teal-500 to-sky-500 text-slate-950 font-bold text-sm shadow-lg shadow-teal-500/20 hover:shadow-teal-500/35 transition-all flex items-center gap-2"
+                >
+                  <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+                    <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+                  </svg>
+                  <span>Daftarkan Klub {sport.name} via WhatsApp</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      );
+    })}
+
+  </div>
+</section>
+
+<script>
+  const tabButtons = document.querySelectorAll<HTMLButtonElement>('.tab-button');
+  const tabPanels = document.querySelectorAll<HTMLDivElement>('.tab-panel');
+
+  tabButtons.forEach((button) => {
+    button.addEventListener('click', () => {
+      const targetId = button.getAttribute('data-tab-target');
+      if (!targetId) return;
+
+      // Update button styles
+      tabButtons.forEach((btn) => {
+        btn.classList.remove('bg-teal-500', 'text-slate-950', 'border-teal-400', 'shadow-lg', 'shadow-teal-500/25');
+        btn.classList.add('bg-slate-900/80', 'text-slate-400', 'border-white/10');
+      });
+
+      button.classList.remove('bg-slate-900/80', 'text-slate-400', 'border-white/10');
+      button.classList.add('bg-teal-500', 'text-slate-950', 'border-teal-400', 'shadow-lg', 'shadow-teal-500/25');
+
+      // Update panel visibility
+      tabPanels.forEach((panel) => {
+        if (panel.id === targetId) {
+          panel.classList.remove('hidden');
+          panel.classList.add('block');
+        } else {
+          panel.classList.remove('block');
+          panel.classList.add('hidden');
+        }
+      });
+    });
+  });
+</script>

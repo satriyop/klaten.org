@@ -1,0 +1,103 @@
+---
+import { SITE_CONFIG, ACTIVE_CLUBS, WA_TEMPLATES, getWhatsAppLink } from '../data/config';
+
+const currentYear = new Date().getFullYear();
+const waFooterLink = getWhatsAppLink(WA_TEMPLATES.clubRegistration());
+---
+
+<footer class="border-t border-white/5 bg-[#050811] text-slate-400 text-sm py-16">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-10 mb-12">
+      
+      <!-- Brand & Mission (2 cols) -->
+      <div class="lg:col-span-2 space-y-4">
+        <a href="/" class="flex items-center gap-3">
+          <div class="w-9 h-9 rounded-xl bg-gradient-to-br from-teal-400 to-sky-600 flex items-center justify-center font-black text-black text-base shadow-md">
+            K
+          </div>
+          <span class="text-xl font-extrabold tracking-tight text-white">
+            klaten<span class="text-teal-400">.org</span>
+          </span>
+        </a>
+        <p class="text-slate-400 text-sm leading-relaxed max-w-sm">
+          Pusat komunitas & platform digital mandiri untuk klub olahraga di Kabupaten Klaten, Jawa Tengah. Memajukan pembinaan atlet usia dini hingga prestasi bersama teknologi modern.
+        </p>
+        <div class="text-xs text-slate-500">
+          📍 Inisiatif Komunitas Olahraga & Teknologi Klaten
+        </div>
+      </div>
+
+      <!-- Quick Links -->
+      <div class="space-y-3">
+        <div class="text-xs font-bold uppercase tracking-wider text-slate-200">
+          Ekosistem
+        </div>
+        <ul class="space-y-2">
+          <li><a href="#cabor" class="hover:text-teal-400 transition-colors">Daftar Cabor</a></li>
+          <li><a href="#fitur" class="hover:text-teal-400 transition-colors">Fitur Presensi & Portal</a></li>
+          <li><a href="#pilar-audiens" class="hover:text-teal-400 transition-colors">Untuk Pelatih & Wali</a></li>
+          <li><a href="#faq" class="hover:text-teal-400 transition-colors">Pertanyaan Umum</a></li>
+        </ul>
+      </div>
+
+      <!-- Klub Terdaftar -->
+      <div class="space-y-3">
+        <div class="text-xs font-bold uppercase tracking-wider text-slate-200">
+          Klub Aktif
+        </div>
+        <ul class="space-y-2">
+          {ACTIVE_CLUBS.map((club) => (
+            <li>
+              <a
+                href={club.url}
+                target="_blank"
+                rel="noopener noreferrer"
+                class="hover:text-teal-300 transition-colors flex items-center gap-1.5"
+              >
+                <span>{club.shortName}</span>
+                <span class="text-[10px] text-teal-400">↗</span>
+              </a>
+            </li>
+          ))}
+          <li class="pt-1">
+            <span class="text-xs text-slate-500 italic">Klub berikutnya segera hadir</span>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Kontak & Onboarding -->
+      <div class="space-y-3">
+        <div class="text-xs font-bold uppercase tracking-wider text-slate-200">
+          Pendaftaran Klub
+        </div>
+        <p class="text-xs text-slate-400">
+          Ingin mendapatkan subdomain [klub].klaten.org untuk klub Anda?
+        </p>
+        <a
+          href={waFooterLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 text-teal-400 hover:text-teal-300 font-semibold text-xs"
+        >
+          <span>Chat WhatsApp Admin ↗</span>
+        </a>
+      </div>
+
+    </div>
+
+    <!-- Bottom Bar -->
+    <div class="pt-8 border-t border-white/5 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+      <div>
+        © {currentYear} klaten.org. Komunitas Olahraga Kabupaten Klaten, Jawa Tengah.
+      </div>
+      <div class="flex items-center gap-6">
+        <a href="https://bmsc.klaten.org" target="_blank" rel="noopener noreferrer" class="hover:text-slate-300 transition-colors">
+          bmsc.klaten.org
+        </a>
+        <a href={waFooterLink} target="_blank" rel="noopener noreferrer" class="hover:text-slate-300 transition-colors">
+          Bantuan & Kontak
+        </a>
+      </div>
+    </div>
+  </div>
+</footer>
