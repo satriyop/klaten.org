@@ -1,5 +1,5 @@
 ---
-import { SITE_CONFIG, WA_TEMPLATES, getWhatsAppLink } from '../data/config';
+import { SITE_CONFIG, SPORTS_CATEGORIES, WA_TEMPLATES, getWhatsAppLink } from '../data/config';
 
 const waHeroLink = getWhatsAppLink(WA_TEMPLATES.clubRegistration());
 ---
@@ -56,7 +56,7 @@ const waHeroLink = getWhatsAppLink(WA_TEMPLATES.clubRegistration());
           <div class="text-xs text-slate-500 font-medium">BMSC (bmsc.klaten.org)</div>
         </div>
         <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm text-center">
-          <div class="text-2xl sm:text-3xl font-bold text-slate-900 mb-0.5">6 Cabor</div>
+          <div class="text-2xl sm:text-3xl font-bold text-slate-900 mb-0.5">{SPORTS_CATEGORIES.length} Cabor</div>
           <div class="text-xs text-slate-500 font-medium">Kategori Direktori</div>
         </div>
         <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm text-center">
