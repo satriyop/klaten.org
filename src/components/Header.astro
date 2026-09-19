@@ -1,7 +1,11 @@
 ---
-import { SITE_CONFIG, WA_TEMPLATES, getWhatsAppLink } from '../data/config';
+import { WA_TEMPLATES, getWhatsAppLink } from '../data/config';
+import { ATHLETES } from '../data/athletes';
 
 const waLink = getWhatsAppLink(WA_TEMPLATES.clubRegistration());
+const path = Astro.url.pathname;
+const klubActive = path === '/klub' || path.startsWith('/klub/');
+const atletActive = path === '/atlet' || path.startsWith('/atlet/');
 ---
 
 <header class="sticky top-0 z-50 w-full border-b border-slate-200/80 bg-white/95 backdrop-blur-md transition-all duration-300">
@@ -23,9 +27,19 @@ const waLink = getWhatsAppLink(WA_TEMPLATES.clubRegistration());
 
     <!-- Desktop Navigation -->
     <nav class="hidden md:flex items-center gap-7 text-sm font-semibold text-slate-700">
-      <a href="/klub" class="text-emerald-700 hover:text-emerald-800 transition-colors flex items-center gap-1.5">
+      <a
+        href="/klub"
+        class={`${klubActive ? 'text-emerald-700' : 'hover:text-emerald-600'} transition-colors flex items-center gap-1.5`}
+      >
         <span>Direktori Klub</span>
         <span class="px-1.5 py-0.5 text-[10px] font-bold bg-emerald-100 text-emerald-800 rounded-full">30+</span>
+      </a>
+      <a
+        href="/atlet"
+        class={`${atletActive ? 'text-emerald-700' : 'hover:text-emerald-600'} transition-colors flex items-center gap-1.5`}
+      >
+        <span>Direktori Atlet</span>
+        <span class="px-1.5 py-0.5 text-[10px] font-bold bg-emerald-100 text-emerald-800 rounded-full">{ATHLETES.length}</span>
       </a>
       <a href="/#cabor" class="hover:text-emerald-600 transition-colors">Cabang Olahraga</a>
       <a href="https://bmsc.klaten.org" target="_blank" rel="noopener noreferrer" class="hover:text-emerald-600 transition-colors flex items-center gap-1.5">
@@ -70,6 +84,10 @@ const waLink = getWhatsAppLink(WA_TEMPLATES.clubRegistration());
     <a href="/klub" class="block py-2 text-emerald-700 font-bold text-sm flex items-center justify-between">
       <span>Direktori Klub Olahraga</span>
       <span class="px-2 py-0.5 text-[10px] font-bold bg-emerald-100 text-emerald-800 rounded-full">30+ Klub</span>
+    </a>
+    <a href="/atlet" class="block py-2 text-emerald-700 font-bold text-sm flex items-center justify-between">
+      <span>Direktori Atlet</span>
+      <span class="px-2 py-0.5 text-[10px] font-bold bg-emerald-100 text-emerald-800 rounded-full">{ATHLETES.length}</span>
     </a>
     <a href="/#cabor" class="block py-2 text-slate-700 hover:text-emerald-600 font-semibold text-sm">Cabang Olahraga</a>
     <a href="https://bmsc.klaten.org" target="_blank" rel="noopener noreferrer" class="block py-2 text-slate-700 hover:text-emerald-600 font-semibold text-sm flex items-center justify-between">

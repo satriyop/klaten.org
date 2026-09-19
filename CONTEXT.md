@@ -12,6 +12,10 @@ _Avoid_: platform (ambiguous), portal, landing (implementation)
 A directory row on the Hub for a real-world organisation. May never run the Club OS. `integrated` is a hand-edit at cutover, not a live feed from Club OS.
 _Avoid_: Club (that is a tenant), tenant, integrated club
 
+**Atlet**:
+A public, opt-in Hub profile for a person, grouped by Sport, with optional Instagram / TikTok / X / website. Curated like a Listing. Not a Club OS roster row.
+_Avoid_: Swimmer (Club OS), member, player
+
 **Sport**:
 The discipline a Listing or Club belongs to (`renang`, `panahan`, `basket`, …). Required on a Club. Same ids as Hub Listings. Spectra runs only for `renang`.
 _Avoid_: cabor as an English code term (UI may say cabor)

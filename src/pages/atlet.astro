@@ -1,0 +1,227 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import AthleteSocials from '../components/AthleteSocials.astro';
+import { ATHLETES, ATHLETE_SPORT_CATEGORIES, athleteInitials, athleteSocials } from '../data/athletes';
+import { getWhatsAppLink, WA_TEMPLATES } from '../data/config';
+
+const title = 'Direktori Atlet Kabupaten Klaten — klaten.org';
+const description =
+  'Direktori atlet olahraga Kabupaten Klaten per cabor. Ikuti Instagram, TikTok, X, dan situs atlet yang terdaftar.';
+const waRegister = getWhatsAppLink(WA_TEMPLATES.athleteRegistration());
+---
+
+<Layout title={title} description={description}>
+  <Header />
+
+  <main class="flex-grow py-10 sm:py-16">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
+        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-100 text-emerald-800 text-xs font-bold uppercase tracking-wider mb-4">
+          Direktori Publik · Opt-in
+        </div>
+        <h1 class="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight mb-4">
+          Direktori Atlet di <span class="text-emerald-700">Kabupaten Klaten</span>
+        </h1>
+        <p class="text-base sm:text-lg text-slate-600 leading-relaxed">
+          Temukan atlet per cabor dan ikuti media sosial mereka. Nama masuk daftar ini hanya atas permintaan — bukan roster klub.
+        </p>
+      </div>
+
+      <div class="bg-white p-5 sm:p-7 rounded-3xl border border-slate-200 shadow-sm mb-10">
+        <div class="flex flex-col md:flex-row gap-4 items-center justify-between mb-6">
+          <div class="relative w-full md:max-w-md">
+            <span class="absolute inset-y-0 left-0 flex items-center pl-3.5 pointer-events-none text-slate-400">
+              <svg class="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
+              </svg>
+            </span>
+            <input
+              type="text"
+              id="search-input"
+              placeholder="Cari nama atlet atau klub..."
+              class="w-full pl-11 pr-4 py-3 rounded-2xl bg-slate-50 border border-slate-200 text-slate-900 placeholder-slate-400 text-sm focus:outline-none focus:ring-2 focus:ring-emerald-600 focus:bg-white transition-all"
+            />
+          </div>
+          <div class="text-xs sm:text-sm font-semibold text-slate-500 shrink-0">
+            Menampilkan <span id="visible-count" class="font-bold text-emerald-700">{ATHLETES.length}</span> atlet terdata
+          </div>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-100">
+          {ATHLETE_SPORT_CATEGORIES.map((cat, idx) => (
+            <button
+              type="button"
+              data-filter={cat.id}
+              class={`filter-pill px-3.5 py-1.5 rounded-xl text-xs sm:text-sm font-semibold transition-all cursor-pointer border ${
+                idx === 0
+                  ? 'active-filter bg-emerald-600 text-white border-emerald-600 shadow-sm'
+                  : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
+              }`}
+            >
+              {cat.name}
+            </button>
+          ))}
+        </div>
+      </div>
+
+      <div id="athletes-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+        {ATHLETES.map((athlete) => {
+          const links = athleteSocials(athlete);
+          const initials = athleteInitials(athlete.name);
+          return (
+            <article
+              class="athlete-card bg-white rounded-3xl p-6 border border-slate-200 shadow-sm flex flex-col hover:shadow-md hover:border-slate-300 transition-all duration-200"
+              data-sport={athlete.sportId}
+              data-name={athlete.name.toLowerCase()}
+              data-club={(athlete.clubName ?? '').toLowerCase()}
+            >
+              <div class="flex items-start gap-4 mb-4">
+                <div
+                  class="w-14 h-14 rounded-2xl bg-emerald-600 text-white font-bold text-lg flex items-center justify-center shrink-0"
+                  aria-hidden="true"
+                >
+                  {initials}
+                </div>
+                <div class="min-w-0">
+                  <a href={`/atlet/${athlete.slug}`} class="text-xl font-bold text-slate-900 leading-snug hover:text-emerald-700">
+                    {athlete.name}
+                  </a>
+                  <div class="text-xs font-semibold text-emerald-700 mt-1">{athlete.sport}</div>
+                  {athlete.clubName && (
+                    <div class="text-xs text-slate-500 mt-0.5 truncate">
+                      {athlete.clubUrl ? (
+                        <a href={athlete.clubUrl} target="_blank" rel="noopener noreferrer" class="hover:text-emerald-700">
+                          {athlete.clubName}
+                        </a>
+                      ) : (
+                        athlete.clubName
+                      )}
+                      <span> · {athlete.city}</span>
+                    </div>
+                  )}
+                </div>
+              </div>
+
+              {athlete.bio && (
+                <p class="text-slate-600 text-sm leading-relaxed mb-4">{athlete.bio}</p>
+              )}
+
+              <div class="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
+                <AthleteSocials links={links} />
+                <a
+                  href={`/atlet/${athlete.slug}`}
+                  class="text-xs font-bold text-emerald-700 hover:text-emerald-800 shrink-0"
+                >
+                  Profil →
+                </a>
+              </div>
+            </article>
+          );
+        })}
+      </div>
+
+      <div id="empty-state" class="hidden text-center py-16 bg-white rounded-3xl border border-slate-200 p-8">
+        <div class="w-12 h-12 rounded-full bg-slate-100 flex items-center justify-center text-slate-400 mx-auto mb-3">
+          <svg class="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+          </svg>
+        </div>
+        <h4 class="text-lg font-bold text-slate-900 mb-1">Tidak Ada Atlet yang Cocok</h4>
+        <p class="text-sm text-slate-500 max-w-md mx-auto mb-6">
+          Belum ada atlet untuk filter ini. Ingin nama Anda atau atlet klub Anda masuk daftar?
+        </p>
+        <a
+          href={waRegister}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#25D366] text-white font-bold text-sm shadow-sm"
+        >
+          Daftarkan Atlet via WhatsApp
+        </a>
+      </div>
+
+      <div class="mt-16 rounded-3xl p-8 sm:p-10 bg-emerald-900 text-white text-center sm:text-left flex flex-col sm:flex-row items-center justify-between gap-6 shadow-sm">
+        <div class="space-y-2">
+          <span class="px-3 py-1 rounded-full text-xs font-bold bg-emerald-800 text-emerald-200 uppercase tracking-wider">
+            Atlet & Orang Tua
+          </span>
+          <h3 class="text-2xl sm:text-3xl font-bold">Ingin Masuk Direktori Ini?</h3>
+          <p class="text-emerald-100/90 text-sm max-w-xl">
+            Kirim nama, cabor, dan tautan Instagram / TikTok / X / situs. Hanya yang meminta yang kami tampilkan. Bukan data roster klub.
+          </p>
+        </div>
+        <a
+          href={waRegister}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="shrink-0 px-6 py-3.5 rounded-xl bg-[#25D366] hover:bg-[#20bd5a] text-white font-bold text-sm shadow-sm transition-all flex items-center gap-2"
+        >
+          <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24">
+            <path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981zm11.387-5.464c-.074-.124-.272-.198-.57-.347-.297-.149-1.758-.868-2.031-.967-.272-.099-.47-.149-.669.149-.198.297-.768.967-.941 1.165-.173.198-.347.223-.644.074-.297-.149-1.255-.462-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.297-.347.446-.521.151-.172.2-.296.3-.495.099-.198.05-.372-.025-.521-.075-.148-.669-1.611-.916-2.206-.242-.579-.487-.501-.669-.51l-.57-.01c-.198 0-.52.074-.792.372s-1.04 1.016-1.04 2.479 1.065 2.876 1.213 3.074c.149.198 2.095 3.2 5.076 4.487.709.306 1.263.489 1.694.626.712.226 1.36.194 1.872.118.571-.085 1.758-.719 2.006-1.413.248-.695.248-1.29.173-1.414z"/>
+          </svg>
+          <span>Daftarkan Atlet via WhatsApp</span>
+        </a>
+      </div>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<script>
+  const searchInput = document.getElementById('search-input') as HTMLInputElement;
+  const filterPills = document.querySelectorAll<HTMLButtonElement>('.filter-pill');
+  const athleteCards = document.querySelectorAll<HTMLElement>('.athlete-card');
+  const visibleCountEl = document.getElementById('visible-count');
+  const emptyState = document.getElementById('empty-state');
+
+  let activeCategory = 'all';
+  let searchTerm = '';
+
+  function updateFilter() {
+    let visibleCount = 0;
+
+    athleteCards.forEach((card) => {
+      const sport = card.getAttribute('data-sport') || '';
+      const name = card.getAttribute('data-name') || '';
+      const club = card.getAttribute('data-club') || '';
+      const matchesCategory = activeCategory === 'all' || sport === activeCategory;
+      const matchesSearch =
+        searchTerm === '' || name.includes(searchTerm) || club.includes(searchTerm);
+
+      if (matchesCategory && matchesSearch) {
+        card.classList.remove('hidden');
+        visibleCount++;
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+
+    if (visibleCountEl) visibleCountEl.textContent = String(visibleCount);
+    if (emptyState) {
+      emptyState.classList.toggle('hidden', visibleCount !== 0);
+    }
+  }
+
+  if (searchInput) {
+    searchInput.addEventListener('input', (e) => {
+      searchTerm = (e.target as HTMLInputElement).value.toLowerCase().trim();
+      updateFilter();
+    });
+  }
+
+  filterPills.forEach((pill) => {
+    pill.addEventListener('click', () => {
+      activeCategory = pill.getAttribute('data-filter') || 'all';
+      filterPills.forEach((p) => {
+        p.classList.remove('bg-emerald-600', 'text-white', 'border-emerald-600', 'shadow-sm');
+        p.classList.add('bg-slate-50', 'text-slate-700', 'border-slate-200');
+      });
+      pill.classList.remove('bg-slate-50', 'text-slate-700', 'border-slate-200');
+      pill.classList.add('bg-emerald-600', 'text-white', 'border-emerald-600', 'shadow-sm');
+      updateFilter();
+    });
+  });
+</script>

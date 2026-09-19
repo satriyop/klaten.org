@@ -1,0 +1,123 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+import AthleteSocials from '../../components/AthleteSocials.astro';
+import { ATHLETES, athleteInitials, athleteSocials } from '../../data/athletes';
+import { getWhatsAppLink, WA_TEMPLATES } from '../../data/config';
+
+export function getStaticPaths() {
+  return ATHLETES.map((athlete) => ({
+    params: { slug: athlete.slug },
+    props: { athlete },
+  }));
+}
+
+const { athlete } = Astro.props;
+const links = athleteSocials(athlete);
+const related = ATHLETES.filter((row) => row.sportId === athlete.sportId && row.slug !== athlete.slug);
+const title = `${athlete.name} — Direktori Atlet klaten.org`;
+const description = athlete.bio ?? `${athlete.name}, atlet ${athlete.sport} di Kabupaten Klaten.`;
+---
+
+<Layout title={title} description={description}>
+  <Header />
+
+  <main class="flex-grow py-10 sm:py-16">
+    <div class="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav class="text-xs font-semibold text-slate-500 mb-8 flex flex-wrap items-center gap-1.5">
+        <a href="/atlet" class="hover:text-emerald-700">Direktori Atlet</a>
+        <span>/</span>
+        <a href="/atlet" class="hover:text-emerald-700">{athlete.sport}</a>
+        <span>/</span>
+        <span class="text-slate-800">{athlete.name}</span>
+      </nav>
+
+      <article class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-8">
+        <div class="flex flex-col sm:flex-row sm:items-start gap-5 mb-6">
+          <div
+            class="w-20 h-20 rounded-2xl bg-emerald-600 text-white font-bold text-2xl flex items-center justify-center shrink-0"
+            aria-hidden="true"
+          >
+            {athleteInitials(athlete.name)}
+          </div>
+          <div>
+            <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
+              {athlete.name}
+            </h1>
+            <p class="text-sm font-semibold text-emerald-700 mt-2">{athlete.sport}</p>
+            <p class="text-sm text-slate-500 mt-1">
+              {athlete.clubUrl ? (
+                <a href={athlete.clubUrl} target="_blank" rel="noopener noreferrer" class="hover:text-emerald-700 font-medium">
+                  {athlete.clubName}
+                </a>
+              ) : (
+                athlete.clubName
+              )}
+              {athlete.clubName && <span> · </span>}
+              {athlete.city}
+            </p>
+          </div>
+        </div>
+
+        {athlete.bio && (
+          <p class="text-slate-600 leading-relaxed mb-8">{athlete.bio}</p>
+        )}
+
+        {links.length > 0 && (
+          <div>
+            <h2 class="text-xs font-bold uppercase tracking-wider text-slate-900 mb-3">Media sosial</h2>
+            <div class="flex flex-col sm:flex-row sm:items-center gap-4">
+              <AthleteSocials links={links} size="md" />
+              <ul class="text-sm text-slate-600 space-y-1">
+                {links.map((link) => (
+                  <li>
+                    <a href={link.href} target="_blank" rel="noopener noreferrer" class="hover:text-emerald-700 font-medium">
+                      {link.kind === 'instagram' && 'Instagram'}
+                      {link.kind === 'tiktok' && 'TikTok'}
+                      {link.kind === 'x' && 'X'}
+                      {link.kind === 'website' && 'Situs'}
+                      <span class="text-slate-400"> · {link.label}</span>
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </div>
+          </div>
+        )}
+      </article>
+
+      {related.length > 0 && (
+        <section class="mt-10">
+          <h2 class="text-sm font-bold text-slate-900 mb-4">Atlet lain di {athlete.sport}</h2>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+            {related.map((row) => (
+              <a
+                href={`/atlet/${row.slug}`}
+                class="bg-white rounded-2xl border border-slate-200 p-4 hover:border-slate-300 hover:shadow-sm transition-all"
+              >
+                <div class="font-bold text-slate-900">{row.name}</div>
+                <div class="text-xs text-emerald-700 font-semibold mt-0.5">{row.sport}</div>
+              </a>
+            ))}
+          </div>
+        </section>
+      )}
+
+      <p class="mt-10 text-center">
+        <a href="/atlet" class="text-sm font-bold text-emerald-700 hover:text-emerald-800">← Semua atlet</a>
+        <span class="text-slate-300 mx-2">·</span>
+        <a
+          href={getWhatsAppLink(WA_TEMPLATES.athleteRegistration())}
+          target="_blank"
+          rel="noopener noreferrer"
+          class="text-sm font-bold text-slate-500 hover:text-emerald-700"
+        >
+          Daftarkan atlet
+        </a>
+      </p>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>

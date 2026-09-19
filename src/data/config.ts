@@ -50,6 +50,10 @@ export const WA_TEMPLATES = {
     const target = clubName ? `klub ${clubName}` : 'klub olahraga';
     return `Halo Tim klaten.org, saya orang tua yang tertarik mencari informasi pembinaan dan jadwal latihan untuk anak di ${target}.`;
   },
+  athleteRegistration: (sportName?: string) => {
+    const topic = sportName ? `cabor ${sportName}` : 'cabor saya';
+    return `Halo Tim klaten.org, saya ingin mendaftarkan atlet ke direktori klaten.org (${topic}). Nama, klub, dan tautan Instagram / TikTok / X / situs:`;
+  },
 };
 
 export function getWhatsAppLink(message: string, phoneNumber = SITE_CONFIG.contact.whatsappNumber): string {
