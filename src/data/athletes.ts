@@ -37,6 +37,18 @@ export const ATHLETES: Athlete[] = [
     bio: 'Perenang Black Marlins Swimming Club Klaten.',
     instagram: 'luigi.banyu',
   },
+  {
+    slug: 'kun-bumi-pamungkas',
+    name: 'Kun Bumi Pamungkas',
+    sport: 'Renang (Akuatik)',
+    sportId: 'renang',
+    city: 'Klaten',
+    clubId: 'bmsc',
+    clubName: 'Black Marlins Swimming Club',
+    clubUrl: 'https://bmsc.klaten.org',
+    bio: 'Perenang Black Marlins Swimming Club Klaten.',
+    website: 'https://bumi.pamungkas.org',
+  },
 ];
 
 export function athleteInitials(name: string): string {
@@ -71,7 +83,13 @@ export function athleteSocials(athlete: Athlete): AthleteSocial[] {
   }
   if (athlete.website) {
     const href = athlete.website.startsWith('http') ? athlete.website : `https://${athlete.website}`;
-    links.push({ kind: 'website', label: 'Situs', href });
+    let label = 'Situs';
+    try {
+      label = new URL(href).hostname.replace(/^www\./, '');
+    } catch {
+      /* keep Situs */
+    }
+    links.push({ kind: 'website', label, href });
   }
   return links;
 }
