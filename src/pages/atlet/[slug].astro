@@ -2,8 +2,9 @@
 import Layout from '../../layouts/Layout.astro';
 import Header from '../../components/Header.astro';
 import Footer from '../../components/Footer.astro';
+import AthleteAvatar from '../../components/AthleteAvatar.astro';
 import AthleteSocials from '../../components/AthleteSocials.astro';
-import { ATHLETES, athleteInitials, athleteSocials } from '../../data/athletes';
+import { ATHLETES, athleteSocials } from '../../data/athletes';
 import { getWhatsAppLink, WA_TEMPLATES } from '../../data/config';
 
 export function getStaticPaths() {
@@ -35,12 +36,7 @@ const description = athlete.bio ?? `${athlete.name}, atlet ${athlete.sport} di K
 
       <article class="bg-white rounded-3xl border border-slate-200 shadow-sm p-6 sm:p-8">
         <div class="flex flex-col sm:flex-row sm:items-start gap-5 mb-6">
-          <div
-            class="w-20 h-20 rounded-2xl bg-emerald-600 text-white font-bold text-2xl flex items-center justify-center shrink-0"
-            aria-hidden="true"
-          >
-            {athleteInitials(athlete.name)}
-          </div>
+          <AthleteAvatar athlete={athlete} size="lg" />
           <div>
             <h1 class="text-3xl sm:text-4xl font-extrabold text-slate-900 tracking-tight leading-tight">
               {athlete.name}

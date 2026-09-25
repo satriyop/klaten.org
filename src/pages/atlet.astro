@@ -2,8 +2,9 @@
 import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
+import AthleteAvatar from '../components/AthleteAvatar.astro';
 import AthleteSocials from '../components/AthleteSocials.astro';
-import { ATHLETES, athleteInitials, athleteSocials } from '../data/athletes';
+import { ATHLETES, athletePrimarySocial, athleteSocials } from '../data/athletes';
 import { getWhatsAppLink, WA_TEMPLATES } from '../data/config';
 import { filtersForSportIds } from '../data/sports';
 import { athleteSportIds } from '../data/stats';
@@ -73,7 +74,7 @@ const waRegister = getWhatsAppLink(WA_TEMPLATES.athleteRegistration());
       <div id="athletes-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
         {ATHLETES.map((athlete) => {
           const links = athleteSocials(athlete);
-          const initials = athleteInitials(athlete.name);
+          const primary = athletePrimarySocial(athlete);
           return (
             <article
               class="athlete-card bg-white rounded-3xl p-6 border border-slate-200 shadow-sm flex flex-col hover:shadow-md hover:border-slate-300 transition-all duration-200"
@@ -81,13 +82,8 @@ const waRegister = getWhatsAppLink(WA_TEMPLATES.athleteRegistration());
               data-name={athlete.name.toLowerCase()}
               data-club={(athlete.clubName ?? '').toLowerCase()}
             >
-              <div class="flex items-start gap-4 mb-4">
-                <div
-                  class="w-14 h-14 rounded-2xl bg-emerald-600 text-white font-bold text-lg flex items-center justify-center shrink-0"
-                  aria-hidden="true"
-                >
-                  {initials}
-                </div>
+              <div class="flex items-start gap-4">
+                <AthleteAvatar athlete={athlete} />
                 <div class="min-w-0">
                   <a href={`/atlet/${athlete.slug}`} class="text-xl font-bold text-slate-900 leading-snug hover:text-emerald-700">
                     {athlete.name}
@@ -105,12 +101,18 @@ const waRegister = getWhatsAppLink(WA_TEMPLATES.athleteRegistration());
                       <span> · {athlete.city}</span>
                     </div>
                   )}
+                  {primary && (
+                    <a
+                      href={primary.href}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      class="mt-1.5 inline-block text-xs font-semibold text-slate-500 hover:text-emerald-700"
+                    >
+                      {primary.label}
+                    </a>
+                  )}
                 </div>
               </div>
-
-              {athlete.bio && (
-                <p class="text-slate-600 text-sm leading-relaxed mb-4">{athlete.bio}</p>
-              )}
 
               <div class="mt-auto pt-4 border-t border-slate-100 flex items-center justify-between gap-3">
                 <AthleteSocials links={links} />

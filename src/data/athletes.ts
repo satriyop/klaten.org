@@ -16,6 +16,8 @@ export interface Athlete {
   clubName?: string;
   clubUrl?: string;
   bio?: string;
+  /** Local path under /public, e.g. /athletes/luigi.jpg. Preferred over social tiles. */
+  photo?: string;
   instagram?: string;
   tiktok?: string;
   x?: string;
@@ -72,4 +74,8 @@ export function athleteSocials(athlete: Athlete): AthleteSocial[] {
     links.push({ kind: 'website', label: 'Situs', href });
   }
   return links;
+}
+
+export function athletePrimarySocial(athlete: Athlete): AthleteSocial | undefined {
+  return athleteSocials(athlete)[0];
 }
