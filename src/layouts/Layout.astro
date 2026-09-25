@@ -11,6 +11,8 @@ const {
   title = SITE_CONFIG.title,
   description = SITE_CONFIG.description,
 } = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, SITE_CONFIG.url).href;
 ---
 
 <!doctype html>
@@ -28,17 +30,19 @@ const {
     <meta name="keywords" content="klaten, olahraga klaten, klub renang klaten, bmsc klaten, bulutangkis klaten, ssb klaten, tenis klaten, futsal klaten, jadwal latihan olahraga, pelatih klaten" />
     <meta name="author" content="Komunitas Olahraga Klaten" />
 
+    <link rel="canonical" href={canonical} />
+
     <!-- Open Graph / Facebook -->
     <meta property="og:type" content="website" />
-    <meta property="og:url" content={SITE_CONFIG.url} />
+    <meta property="og:url" content={canonical} />
     <meta property="og:title" content={title} />
     <meta property="og:description" content={description} />
     <meta property="og:locale" content="id_ID" />
     <meta property="og:site_name" content="klaten.org" />
 
     <!-- Twitter -->
-    <meta property="twitter:card" content="summary_large_image" />
-    <meta property="twitter:url" content={SITE_CONFIG.url} />
+    <meta property="twitter:card" content="summary" />
+    <meta property="twitter:url" content={canonical} />
     <meta property="twitter:title" content={title} />
     <meta property="twitter:description" content={description} />
 

@@ -3,8 +3,12 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import AthleteSocials from '../components/AthleteSocials.astro';
-import { ATHLETES, ATHLETE_SPORT_CATEGORIES, athleteInitials, athleteSocials } from '../data/athletes';
+import { ATHLETES, athleteInitials, athleteSocials } from '../data/athletes';
 import { getWhatsAppLink, WA_TEMPLATES } from '../data/config';
+import { filtersForSportIds } from '../data/sports';
+import { athleteSportIds } from '../data/stats';
+
+const athleteFilters = filtersForSportIds(athleteSportIds);
 
 const title = 'Direktori Atlet Kabupaten Klaten — klaten.org';
 const description =
@@ -50,7 +54,7 @@ const waRegister = getWhatsAppLink(WA_TEMPLATES.athleteRegistration());
         </div>
 
         <div class="flex flex-wrap items-center gap-2 pt-2 border-t border-slate-100">
-          {ATHLETE_SPORT_CATEGORIES.map((cat, idx) => (
+          {athleteFilters.map((cat, idx) => (
             <button
               type="button"
               data-filter={cat.id}

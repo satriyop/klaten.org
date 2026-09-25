@@ -1,5 +1,6 @@
 ---
-import { SITE_CONFIG, SPORTS_CATEGORIES, WA_TEMPLATES, getWhatsAppLink } from '../data/config';
+import { WA_TEMPLATES, getWhatsAppLink } from '../data/config';
+import { athleteCount, integratedCount, listingCount, listingSportCount } from '../data/stats';
 
 const waHeroLink = getWhatsAppLink(WA_TEMPLATES.clubRegistration());
 ---
@@ -11,7 +12,7 @@ const waHeroLink = getWhatsAppLink(WA_TEMPLATES.clubRegistration());
       <!-- Factual Status Badge -->
       <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-50 border border-emerald-200 text-emerald-800 text-xs sm:text-sm font-semibold mb-6">
         <span class="w-2 h-2 rounded-full bg-emerald-600"></span>
-        <span>Platform Komunitas Olahraga Klaten • BMSC Aktif</span>
+        <span>Hub Olahraga Kabupaten Klaten</span>
       </div>
 
       <!-- Headline -->
@@ -52,20 +53,20 @@ const waHeroLink = getWhatsAppLink(WA_TEMPLATES.clubRegistration());
       <!-- Factual Stats Cards -->
       <div class="grid grid-cols-2 md:grid-cols-4 gap-4 max-w-4xl mx-auto pt-6 border-t border-slate-200">
         <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm text-center">
-          <div class="text-2xl sm:text-3xl font-bold text-slate-900 mb-0.5">1 Klub</div>
-          <div class="text-xs text-slate-500 font-medium">BMSC (bmsc.klaten.org)</div>
+          <div class="text-2xl sm:text-3xl font-bold text-slate-900 mb-0.5">{listingCount} Klub</div>
+          <div class="text-xs text-slate-500 font-medium">Terdata di direktori</div>
         </div>
         <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm text-center">
-          <div class="text-2xl sm:text-3xl font-bold text-slate-900 mb-0.5">{SPORTS_CATEGORIES.length} Cabor</div>
-          <div class="text-xs text-slate-500 font-medium">Kategori Direktori</div>
+          <div class="text-2xl sm:text-3xl font-bold text-slate-900 mb-0.5">{listingSportCount} Cabor</div>
+          <div class="text-xs text-slate-500 font-medium">Di direktori klub</div>
         </div>
         <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm text-center">
-          <div class="text-2xl sm:text-3xl font-bold text-slate-900 mb-0.5">Subdomain</div>
-          <div class="text-xs text-slate-500 font-medium">[klub].klaten.org</div>
+          <div class="text-2xl sm:text-3xl font-bold text-slate-900 mb-0.5">{integratedCount} Hostname</div>
+          <div class="text-xs text-slate-500 font-medium">Club OS · bmsc.klaten.org</div>
         </div>
         <div class="bg-white p-5 rounded-2xl border border-slate-200 shadow-sm text-center">
-          <div class="text-2xl sm:text-3xl font-bold text-slate-900 mb-0.5">Klaten</div>
-          <div class="text-xs text-slate-500 font-medium">Jawa Tengah</div>
+          <div class="text-2xl sm:text-3xl font-bold text-slate-900 mb-0.5">{athleteCount} Atlet</div>
+          <div class="text-xs text-slate-500 font-medium">Direktori publik · opt-in</div>
         </div>
       </div>
 

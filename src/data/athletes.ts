@@ -37,23 +37,6 @@ export const ATHLETES: Athlete[] = [
   },
 ];
 
-export const ATHLETE_SPORT_CATEGORIES = [
-  { id: 'all', name: 'Semua Cabor' },
-  { id: 'renang', name: 'Renang' },
-  { id: 'bulutangkis', name: 'Bulu Tangkis' },
-  { id: 'sepakbola', name: 'Sepak Bola & SSB' },
-  { id: 'basket', name: 'Bola Basket' },
-  { id: 'panahan', name: 'Panahan' },
-  { id: 'beladiri', name: 'Bela Diri & Combat' },
-  { id: 'futsal', name: 'Futsal' },
-  { id: 'voli', name: 'Bola Voli' },
-  { id: 'tenis-padel', name: 'Tenis & Tenis Meja' },
-  { id: 'sepatu-roda', name: 'Sepatu Roda' },
-  { id: 'catur-menembak', name: 'Catur & Menembak' },
-  { id: 'komunitas-lain', name: 'Woodball & Otomotif' },
-  { id: 'lari-atletik', name: 'Lari & Sepeda' },
-];
-
 export function athleteInitials(name: string): string {
   const parts = name.trim().split(/\s+/).filter(Boolean);
   if (parts.length === 0) return '?';

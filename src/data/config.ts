@@ -273,7 +273,11 @@ export const FAQS = [
   },
   {
     q: 'Klub apa saja yang saat ini sudah aktif di klaten.org?',
-    a: 'Saat ini Black Marlins Swimming Club (BMSC) telah aktif beroperasi dengan portal resmi di bmsc.klaten.org. Kami sedang membuka pendaftaran untuk klub bulu tangkis, sekolah sepak bola (SSB), klub tenis/padel, futsal, dan cabang olahraga lainnya di Klaten.',
+    a: 'Direktori klub mencatat puluhan organisasi olahraga di Kabupaten Klaten. Club OS (subdomain [klub].klaten.org) saat ini berjalan di Black Marlins Swimming Club (bmsc.klaten.org). Ada juga direktori atlet publik — nama masuk hanya atas permintaan, bukan dari roster klub.',
+  },
+  {
+    q: 'Bagaimana cara nama atlet masuk direktori?',
+    a: 'Kirim nama, cabor, dan tautan Instagram / TikTok / X / situs via WhatsApp. Kami hanya menampilkan atlet yang meminta (atau diwakilkan dengan izin). Ini bukan data absensi atau roster Club OS.',
   },
   {
     q: 'Apakah klub kami akan mendapatkan website / subdomain sendiri?',

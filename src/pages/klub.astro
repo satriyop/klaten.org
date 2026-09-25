@@ -3,27 +3,13 @@ import Layout from '../layouts/Layout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import { CLUBS_DATA } from '../data/clubs';
-import { SITE_CONFIG, getWhatsAppLink } from '../data/config';
+import { getWhatsAppLink } from '../data/config';
+import { directoryFilters } from '../data/sports';
+import { listingCount } from '../data/stats';
 
 const title = 'Direktori Klub Olahraga Kabupaten Klaten — klaten.org';
 const description = 'Daftar lengkap klub olahraga, SSB, dojang bela diri, PB bulutangkis, akademi basket, panahan, dan komunitas olahraga di Kabupaten Klaten, Jawa Tengah.';
-
-const categories = [
-  { id: 'all', name: 'Semua Cabor' },
-  { id: 'renang', name: 'Renang' },
-  { id: 'bulutangkis', name: 'Bulu Tangkis' },
-  { id: 'sepakbola', name: 'Sepak Bola & SSB' },
-  { id: 'basket', name: 'Bola Basket' },
-  { id: 'panahan', name: 'Panahan' },
-  { id: 'beladiri', name: 'Bela Diri & Combat' },
-  { id: 'futsal', name: 'Futsal' },
-  { id: 'voli', name: 'Bola Voli' },
-  { id: 'tenis-padel', name: 'Tenis & Tenis Meja' },
-  { id: 'sepatu-roda', name: 'Sepatu Roda' },
-  { id: 'catur-menembak', name: 'Catur & Menembak' },
-  { id: 'komunitas-lain', name: 'Woodball & Otomotif' },
-  { id: 'lari-atletik', name: 'Lari & Sepeda' },
-];
+const categories = directoryFilters();
 ---
 
 <Layout title={title} description={description}>
@@ -65,7 +51,7 @@ const categories = [
 
           <!-- Counter display -->
           <div class="text-xs sm:text-sm font-semibold text-slate-500 shrink-0">
-            Menampilkan <span id="visible-count" class="font-bold text-emerald-700">{CLUBS_DATA.length}</span> klub terdata
+            Menampilkan <span id="visible-count" class="font-bold text-emerald-700">{listingCount}</span> klub terdata
           </div>
         </div>
 
